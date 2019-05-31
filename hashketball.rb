@@ -229,12 +229,69 @@ def most_points_scored
     game_hash.each do |location, team_data|
         team_data[:players].each do |player, player_stats|
             if highest_points < player_stats[:points]
-                # binding.pry
+                highest_points = player_stats[:points]
                 player_with_the_most = player.to_s.sub("_", " ")
+                # binding.pry
             end
         end
     end
     player_with_the_most
 end
 
-most_points_scored
+def winning_team
+    home_points = 0
+    away_points = 0
+    winning_team = ""
+
+    game_hash.each do |location, team_data|
+        team_data[:players].each do |player, player_stats|
+            if location == :home
+                home_points = home_points + player_stats[:points]
+            elsif location == :away 
+                away_points = away_points + player_stats[:points]
+            end
+
+            if home_points > away_points
+                winning_team = game_hash[:home][:team_name]
+            elsif away_points > home_points
+                winning_team = game_hash[:away][:team_name]
+            end 
+        end
+    end
+    winning_team
+end
+
+
+def player_with_longest_name
+    longest_name = ""
+
+    game_hash.each do |location, team_data|
+        team_data[:players].each do |player, player_stats|
+            if longest_name.length <= player.to_s.sub("_", " ").length
+                longest_name = player.to_s.sub("_", " ")
+            end
+        end
+    end
+    longest_name
+end
+
+def long_name_steals_a_ton
+    longest_name = ""
+    most_steals = ""
+
+    game_hash.each do |location, team_data|
+        team_data[:players].each do |player, player_stats|
+
+            if longest_name.length <= player.to_s.sub("_", " ").length
+                longest_name = player.to_s.sub("_", " ")
+            end
+
+            if most_steals <= player_stats[:steals]
+                most_steals = player.to_s.sub("_", " ")
+            end
+
+        end
+    end
+    longest_name == most_steals
+end
+
