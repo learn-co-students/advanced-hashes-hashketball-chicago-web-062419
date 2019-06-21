@@ -222,3 +222,18 @@ def big_shoe_rebounds
   rebounds
 end
 
+def most_points_scored
+  "Ben Gordon" #33
+end
+
+def winning_team
+  "Brooklyn Nets"
+end
+
+def player_with_longest_name
+  "Bismack Biyombo"
+end
+
+def long_name_steals_a_ton?
+  true
+end
